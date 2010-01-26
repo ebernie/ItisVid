@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <string name="app_name">KL Traffic Cam</string>
+<string name="fed_hw_near_seri_setia">Federal Highway near Seri Setia</string>
+<string name="menu_about">About</string>
+<string name="menu_about_content">KL Traffic Cam provides live video feed for major Kuala Lumpur highways. An initiative of CodeAndroid.MY (www.codeandroid.my), developed by Bernie Eng.</string>
+<string name="menu_license_content">KL Traffic Cam is licensed under the Apache 2 License. Source is available at http://code.google.com/p/kltrafficcam/</string>
+<string name="menu_license">License</string>
+<string name="label_done">Done</string>
+
+<string name="menu_help">Help</string>
+<string name="menu_help_content">Select a highway to view its live video feed. Press and hold to add to favourites.</string>
+<string name="menu_wap">Load ITIS WAP site</string>
+<string name="menu_exit">Exit</string>
+<string name="menu_exit_content">Exit for real?</string>
+<string name="label_yes">Yes</string>
+<string name="label_no">No</string>
+<string name="menu_home">Home</string>
+<string name="menu_fav">View favorites</string>
+<string name="menu_all">View all cams</string>
+<string name="label_fav_cams">Favorite Cams</string>
+<string name="label_all_cams">All Cams</string>
+<string name="label_itis_wap">ITIS WAP site</string>
+</resources>
