@@ -31,6 +31,8 @@ public class ListAllCamsActivity extends ListActivity {
 	private static final int MENU_ITEM_HOME = Menu.FIRST + 1;
 	private static final int MENU_ITEM_FAV = Menu.FIRST + 2;
 	private static final int MENU_WAP = Menu.FIRST + 3;
+	
+	private DatabaseHelper db = null;
 
 	private static final String[] LOCATIONS = {
 			"Federal Highway near Seri Setia",
@@ -107,6 +109,13 @@ public class ListAllCamsActivity extends ListActivity {
 		listView.setLongClickable(true);
 		listView.setCacheColorHint(0);
 		registerForContextMenu(listView);
+		
+		if (db == null) {
+			db = new DatabaseHelper(
+					this.getApplicationContext(),
+					ItisVidConstants.DATABASE_NAME, null,
+					ItisVidConstants.DATABASE_VERSION);
+		}
 	}
 
 	@Override
@@ -123,10 +132,7 @@ public class ListAllCamsActivity extends ListActivity {
 		switch (item.getItemId()) {
 		case MENU_ADD_FAV:
 			Log.i(ItisVidConstants.LOGTAG, "onLongListItemClick id=" + info.id);
-			DatabaseHelper db = new DatabaseHelper(
-					this.getApplicationContext(),
-					ItisVidConstants.DATABASE_NAME, null,
-					ItisVidConstants.DATABASE_VERSION);
+
 			ContentValues vals = new ContentValues();
 			vals.put(FavCam.CAM_NAME, LOCATIONS[(int) info.id]);
 			vals.put(FavCam.CAM_URL, CAM_URLS[(int) info.id]);
@@ -138,6 +144,14 @@ public class ListAllCamsActivity extends ListActivity {
 			return true;
 		default:
 			return super.onContextItemSelected(item);
+		}
+	}
+	
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		if (db != null) {
+			db.close();
 		}
 	}
 

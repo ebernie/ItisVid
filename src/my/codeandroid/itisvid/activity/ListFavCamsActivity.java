@@ -6,7 +6,6 @@ import my.codeandroid.itisvid.db.DatabaseHelper;
 import my.codeandroid.itisvid.db.FavCam;
 import android.app.ListActivity;
 import android.content.ActivityNotFoundException;
-import android.content.ContentUris;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -88,6 +87,9 @@ public class ListFavCamsActivity extends ListActivity {
 					"Removed entry from favourites", Toast.LENGTH_SHORT);
 			t.show();
 			Cursor favs = db.getFavourites();
+			
+			startManagingCursor(favs);
+			
 			ListView listView = getListView();
 			listView.setTextFilterEnabled(false);
 			listView.setLongClickable(true);
@@ -115,15 +117,22 @@ public class ListFavCamsActivity extends ListActivity {
 			return super.onContextItemSelected(item);
 		}
 	}
+	
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		if (db != null) {
+			db.close();
+		}
+	}
 
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		try {
 			Log.i(ItisVidConstants.LOGTAG,
 					"Attempting to display item with id: " + id);
-			Uri camUri = ContentUris.withAppendedId(FavCam.CONTENT_URI, id);
-			Log.d(ItisVidConstants.LOGTAG, "Uri of row: " + camUri);
-			String url = db.getSelectedCamUrl(camUri);
+			Log.d(ItisVidConstants.LOGTAG, "Uri of row: " + id);
+			String url = db.getSelectedCamUrl(id);
 			Intent tostart = new Intent(Intent.ACTION_VIEW);
 			tostart.setData(Uri.parse(url));
 			startActivity(tostart);
