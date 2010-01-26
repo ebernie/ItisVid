@@ -69,7 +69,7 @@ public class ListAllCamsActivity extends ListActivity {
 			"rtsp://218.208.74.28:8554/live001",
 			"rtsp://218.208.74.27:8554/live007",
 			"rtsp://218.208.74.27:8554/live006",
-			"rstp://218.208.74.26:8554/live8",
+			"rtsp://218.208.74.26:8554/live8",
 			"rtsp://218.208.74.27:8554/live001",
 			"rtsp://218.208.74.26:8554/live006",
 			"rtsp://218.208.74.26:8554/live003",
@@ -77,12 +77,12 @@ public class ListAllCamsActivity extends ListActivity {
 			"rtsp://218.208.74.26:8554/live004",
 			"rtsp://218.208.74.26:8554/live002",
 			"rtsp://218.208.74.28:8554/live008",
-			"rstp://218.208.74.29:8554/live007",
-			"rstp://218.208.74.29:8554/live008",
+			"rtsp://218.208.74.29:8554/live007",
+			"rtsp://218.208.74.29:8554/live008",
 			"rtsp://218.208.74.30:8554/live001",
-			"rstp://218.208.74.30:8554/live002",
+			"rtsp://218.208.74.30:8554/live002",
 			"rtsp://218.208.74.30:8554/live007",
-			"rstp://218.208.74.29:8554/live004",
+			"rtsp://218.208.74.29:8554/live004",
 			"rtsp://218.208.74.26:8554/live007",
 			"rtsp://218.208.74.29:8554/live006",
 			"rtsp://218.208.74.27:8554/live003",
@@ -93,11 +93,11 @@ public class ListAllCamsActivity extends ListActivity {
 			"rtsp://218.208.74.30:8554/live005",
 			"rtsp://218.208.74.30:8554/live007",
 			"rtsp://218.208.74.30:8554/live008",
-			"rstp://218.208.74.28:8554/live002",
-			"rstp://218.208.74.29:8554/live002",
-			"rstp://218.208.74.27:8554/live5",
-			"rstp://124.82.147.149:8554/live004",
-			"rstp://218.208.74.27:8554/live004" };
+			"rtsp://218.208.74.28:8554/live002",
+			"rtsp://218.208.74.29:8554/live002",
+			"rtsp://218.208.74.27:8554/live5",
+			"rtsp://124.82.147.149:8554/live004",
+			"rtsp://218.208.74.27:8554/live004" };
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
