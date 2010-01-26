@@ -7,7 +7,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
-import android.net.Uri;
 import android.util.Log;
 
 /**
@@ -50,10 +49,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		return c;
 	}
 
-	public String getSelectedCamUrl(Uri uri) {
+	public String getSelectedCamUrl(long id) {
 		SQLiteDatabase db = getReadableDatabase();
-		Cursor c = db.query(TABLE_NAME, null, null, null, null, null, null);
+		Log.i(ItisVidConstants.LOGTAG, "Retrieving entry:" + id);
+		Cursor c = db.query(TABLE_NAME, null, "_id=" + id, null, null, null, null, null);
 		c.moveToFirst();
+		Log.d(ItisVidConstants.LOGTAG, "retrieved cam url: " + c.getString(2));
 		return c.getString(2);
 	}
 
@@ -64,7 +65,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		} else {
 			values = new ContentValues();
 		}
-
+		Log.d(ItisVidConstants.LOGTAG, "retrieved cam url: " + values.toString());
 		SQLiteDatabase db = getWritableDatabase();
 		long rowId = db.insert(TABLE_NAME, FavCam.CAM_NAME, values);
 		if (rowId > 0) {
@@ -73,10 +74,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	}
 
-	public int delete(long notesId) {
+	public int delete(long id) {
 		SQLiteDatabase db = getWritableDatabase();
-		Log.i(ItisVidConstants.LOGTAG, "Deleting entry:" + notesId);
-		int count = db.delete(TABLE_NAME, "_id=" + notesId, null);
+		Log.i(ItisVidConstants.LOGTAG, "Deleting entry:" + id);
+		int count = db.delete(TABLE_NAME, "_id=" + id, null);
 		Log.i(ItisVidConstants.LOGTAG, "Data deleted (number of rows): "
 				+ count);
 		return count;
