@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<style name="CustomTheme">
+	<style parent="@android:style/Theme" name="CustomTheme">
 		<item name="android:windowBackground" parent="android:Theme.Light">@drawable/gradient
 		</item>
 	</style>
