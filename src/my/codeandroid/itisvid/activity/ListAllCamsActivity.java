@@ -1,9 +1,18 @@
 package my.codeandroid.itisvid.activity;
 
+import java.io.UnsupportedEncodingException;
+
+import org.apache.http.ParseException;
+import org.apache.http.client.ClientProtocolException;
+
+import com.brightkeep.dropionotes.DroidDropNoteClient;
+
 import my.codeandroid.itisvid.ItisVidConstants;
 import my.codeandroid.itisvid.R;
 import my.codeandroid.itisvid.db.DatabaseHelper;
 import my.codeandroid.itisvid.db.FavCam;
+import my.codeandroid.itisvid.log.RemoteLog;
+import my.codeandroid.itisvid.log.RemoteLogFactory;
 import android.app.ListActivity;
 import android.content.ActivityNotFoundException;
 import android.content.ContentValues;
@@ -31,7 +40,7 @@ public class ListAllCamsActivity extends ListActivity {
 	private static final int MENU_ITEM_HOME = Menu.FIRST + 1;
 	private static final int MENU_ITEM_FAV = Menu.FIRST + 2;
 	private static final int MENU_WAP = Menu.FIRST + 3;
-	
+
 	private DatabaseHelper db = null;
 
 	private static final String[] LOCATIONS = {
@@ -109,10 +118,9 @@ public class ListAllCamsActivity extends ListActivity {
 		listView.setLongClickable(true);
 		listView.setCacheColorHint(0);
 		registerForContextMenu(listView);
-		
+
 		if (db == null) {
-			db = new DatabaseHelper(
-					this.getApplicationContext(),
+			db = new DatabaseHelper(this.getApplicationContext(),
 					ItisVidConstants.DATABASE_NAME, null,
 					ItisVidConstants.DATABASE_VERSION);
 		}
@@ -146,7 +154,7 @@ public class ListAllCamsActivity extends ListActivity {
 			return super.onContextItemSelected(item);
 		}
 	}
-	
+
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
@@ -164,6 +172,10 @@ public class ListAllCamsActivity extends ListActivity {
 					"Unable to play video. No content handler found ...",
 					Toast.LENGTH_SHORT);
 			t.show();
+		} catch (Exception e) {
+			RemoteLog logger = RemoteLogFactory.getRemoteLogger();
+			logger.logThis(ItisVidConstants.LOGTAG, ItisVidConstants.LOG_TITLE,
+					e.getMessage());
 		}
 	}
 
@@ -178,7 +190,7 @@ public class ListAllCamsActivity extends ListActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
 		menu.add(0, MENU_WAP, 0, R.string.menu_wap)
-		.setIcon(R.drawable.world_go);
+				.setIcon(R.drawable.world_go);
 		menu.add(0, MENU_ITEM_HOME, 0, R.string.menu_home).setIcon(
 				R.drawable.house);
 		menu.add(0, MENU_ITEM_FAV, 0, R.string.menu_fav).setIcon(
