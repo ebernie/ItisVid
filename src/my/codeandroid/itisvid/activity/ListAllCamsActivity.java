@@ -166,6 +166,9 @@ public class ListAllCamsActivity extends ListActivity {
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		try {
+			RemoteLog logger = RemoteLogFactory.getRemoteLogger();
+			logger.logThis(ItisVidConstants.LOGTAG, ItisVidConstants.LOG_TITLE,
+			"TEST LOG - PLAYING VIDEOS");
 			startIntent(CAM_URLS[position]);
 		} catch (ActivityNotFoundException e) {
 			Toast t = Toast.makeText(v.getContext(),
