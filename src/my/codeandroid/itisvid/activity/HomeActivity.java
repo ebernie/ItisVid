@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,9 +24,7 @@ public class HomeActivity extends Activity implements OnClickListener {
 
 	// Menu item ids
 	private static final int MENU_ITEM_ABOUT = Menu.FIRST;
-	private static final int MENU_ITEM_LICENSE = Menu.FIRST + 1;
-	private static final int MENU_HELP = Menu.FIRST + 3;
-	private static final int MENU_WAP = Menu.FIRST + 4;
+	private static final int MENU_WAP = Menu.FIRST + 1;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -46,8 +45,8 @@ public class HomeActivity extends Activity implements OnClickListener {
 					ListAllCamsActivity.class));
 			break;
 		case R.id.favcams:
-			 startActivity(new Intent().setClass(v.getContext(),
-			 ListFavCamsActivity.class));
+			startActivity(new Intent().setClass(v.getContext(),
+					ListFavCamsActivity.class));
 			break;
 
 		}
@@ -58,11 +57,8 @@ public class HomeActivity extends Activity implements OnClickListener {
 		super.onCreateOptionsMenu(menu);
 		menu.add(0, MENU_WAP, 0, R.string.menu_wap)
 				.setIcon(R.drawable.world_go);
-		menu.add(0, MENU_HELP, 0, R.string.menu_help).setIcon(R.drawable.help);
 		menu.add(0, MENU_ITEM_ABOUT, 0, R.string.menu_about).setIcon(
 				R.drawable.information);
-		menu.add(0, MENU_ITEM_LICENSE, 0, R.string.menu_license).setIcon(
-				R.drawable.lock_break);
 		return true;
 	}
 
@@ -81,31 +77,11 @@ public class HomeActivity extends Activity implements OnClickListener {
 					});
 			builder.create().show();
 			return true;
-		case MENU_ITEM_LICENSE:
-			builder.setMessage(R.string.menu_license_content).setTitle(
-					R.string.menu_license).setCancelable(true).setIcon(
-					R.drawable.lock_break).setPositiveButton(
-					R.string.label_done, new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialog, int id) {
-							dialog.cancel();
-						}
-					});
-			builder.create().show();
-			return true;
-		case MENU_HELP:
-			builder.setMessage(R.string.menu_help_content).setTitle(
-					R.string.menu_help).setCancelable(true).setIcon(
-					R.drawable.help).setPositiveButton(R.string.label_done,
-					new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialog, int id) {
-							dialog.cancel();
-						}
-					});
-			builder.create().show();
-			return true;
+
 		case MENU_WAP:
-			startActivity(new Intent().setClass(getApplicationContext(),
-					ShowItisWapActivity.class));
+			Intent webIntent = new Intent(Intent.ACTION_VIEW, Uri
+					.parse("http://www.itis.com.my/atis/wap"));
+			startActivity(webIntent);
 			return true;
 		}
 		return super.onOptionsItemSelected(item);

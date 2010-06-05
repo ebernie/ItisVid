@@ -50,12 +50,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	}
 
 	public String getSelectedCamUrl(long id) {
-		SQLiteDatabase db = getReadableDatabase();
-		Log.i(ItisVidConstants.LOGTAG, "Retrieving entry:" + id);
-		Cursor c = db.query(TABLE_NAME, null, "_id=" + id, null, null, null, null, null);
-		c.moveToFirst();
-		Log.d(ItisVidConstants.LOGTAG, "retrieved cam url: " + c.getString(2));
-		return c.getString(2);
+		Cursor c = null;
+		try {
+			SQLiteDatabase db = getReadableDatabase();
+			Log.i(ItisVidConstants.LOGTAG, "Retrieving entry:" + id);
+			c = db.query(TABLE_NAME, null, "_id=" + id, null, null, null, null, null);
+			c.moveToFirst();
+			Log.d(ItisVidConstants.LOGTAG, "retrieved cam url: " + c.getString(2));
+			return c.getString(2);
+		} catch (Exception e) {
+			Log.e(ItisVidConstants.LOGTAG, e.getMessage());
+		} finally {
+			c.close();
+			close();
+		}
+		return "";
 	}
 
 	public void insertFavourites(ContentValues initialValues) {
