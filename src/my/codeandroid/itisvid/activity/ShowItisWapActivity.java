@@ -38,6 +38,7 @@ public class ShowItisWapActivity extends Activity {
 			webview.setWebViewClient(new WebViewClient() {
 				public void onReceivedError(WebView view, int errorCode,
 						String description, String failingUrl) {
+					Log.e(ItisVidConstants.LOGTAG, errorCode + "|" + description + failingUrl);
 					Toast.makeText(activity, "Oh no! " + description,
 							Toast.LENGTH_SHORT).show();
 				}

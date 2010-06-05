@@ -38,7 +38,6 @@ public class HomeActivity extends Activity implements OnClickListener {
 		favCamBtn.setOnClickListener(this);
 	}
 
-	@Override
 	public void onClick(View v) {
 		int clickId = v.getId();
 		switch (clickId) {
